@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NetScope - Application Layer Visualizer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="dashboard" aria-label="Application layer dashboard">
+      <article class="panel activity-panel">
+        <div class="panel-heading"><div><p class="eyebrow">01 / USER ACTIVITY</p><h2>Activity Panel</h2></div><span class="panel-icon">⌘</span></div>
+        <div class="mode-tabs" role="tablist">
+          <button class="mode-tab active" data-mode="browse"><span>◉</span> Browse</button>
+          <button class="mode-tab" data-mode="mail"><span>✉</span> Mail</button>
+          <button class="mode-tab" data-mode="stream"><span>▷</span> Stream</button>
+        </div>
+
+        <div class="activity-content">
+          <form id="browseForm" class="mode-form active" data-form="browse">
+            <label for="urlInput">Destination URL</label>
+            <div class="input-with-icon"><span>⌕</span><input id="urlInput" value="https://www.netscope.edu/learn" autocomplete="off" /></div>
+            <p class="field-note">A simulated request will be sent to the hostname.</p>
+            <button class="primary-action" type="submit"><span>↗</span> Visit page</button>
+          </form>
+          <form id="mailForm" class="mode-form" data-form="mail">
+            <label for="toInput">To</label><input id="toInput" type="email" value="student@netscope.edu" />
+            <label for="subjectInput">Subject</label><input id="subjectInput" value="Application Layer Lab" />
+            <label for="bodyInput">Message</label><textarea id="bodyInput">Here is my protocol visualizer submission.</textarea>
+            <button class="primary-action" type="submit"><span>↗</span> Send email</button>
+          </form>
+          <div id="streamForm" class="mode-form" data-form="stream">
+            <div class="video-preview"><div class="play-orb">▶</div><span>NETWORK FUNDAMENTALS</span><strong>How the web delivers video</strong><small>00:00 <i></i> 04:28</small></div>
+            <label for="qualityInput">Stream quality <span id="qualityLabel">1080p</span></label>
+            <input id="qualityInput" type="range" min="0" max="2" value="2" />
+            <div class="quality-labels"><span>480p</span><span>720p</span><span>1080p</span></div>
+            <button id="streamButton" class="primary-action" type="button"><span>▶</span> Start stream</button>
+          </div>
+        </div>
+        <div class="activity-log"><div class="log-title"><span>ACTIVITY LOG</span><button id="clearLog" type="button">Clear</button></div><ul id="activityLog"><li><time>NOW</time><span class="log-ready">System ready. Choose an activity to begin.</span></li></ul></div>
+      </article>
+
+      <article class="panel protocol-panel">
+        <div class="panel-heading"><div><p class="eyebrow">02 / NETWORK EXCHANGE</p><h2>Protocol Visualizer</h2></div><div class="protocol-state"><span id="stateDot"></span><span id="stateText">IDLE</span></div></div>
+        <div class="protocol-summary"><div><span class="summary-label">CURRENT FLOW</span><strong id="flowTitle">Awaiting activity</strong></div><div class="flow-chips" id="flowChips"><span>DNS</span><span>HTTP</span></div></div>
+        <div id="timeline" class="timeline" aria-live="polite"><div class="empty-state"><div class="empty-network">◌</div><strong>Nothing is moving yet</strong><p>Run an activity on the left to inspect its application-layer exchange.</p></div></div>
+        <div class="transport-legend"><span><i class="arrow-out">→</i> Client to server</span><span><i class="arrow-in">←</i> Server to client</span><span><i class="key-dot"></i> Key field</span></div>
+        <div class="player-controls"><button id="backButton" type="button" aria-label="Previous step">↶</button><button id="playButton" type="button" class="play" aria-label="Play visualization">▶</button><button id="nextButton" type="button" aria-label="Next step">↷</button><button id="replayButton" type="button" class="replay">↻ Replay</button><div class="step-count"><span id="stepCurrent">0</span> / <span id="stepTotal">0</span> steps</div></div>
+      </article>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
